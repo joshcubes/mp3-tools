@@ -1,19 +1,19 @@
-from math import remainder
-
-
 global total_length
+global files_scanned
 total_length = 0.0
+files_scanned = 0
 
 def run(library_path):
     from pathlib import Path
     from mutagen.mp3 import MP3
-
-    print("Working")
     
     # Iterates over all subfolders looking for mp3 files
     def process_folders(rootfolder):
         global total_length
+        global files_scanned
         folder = Path(rootfolder)
+        
+        print()
         
         for item in folder.iterdir():
             if item.is_dir():
@@ -23,9 +23,14 @@ def run(library_path):
                 # opens the file and gets the length
                 audio = MP3(item)
                 total_length += audio.info.length
+                files_scanned += 1
+                print(f"Working: {files_scanned} files scanned so far.", end=' '*10 + '\r')
 
+    
+    
     process_folders(library_path)
-    print(f"Your library has a total length of {total_length} Secconds.")
+    print(f"{files_scanned} files have been scanned.\n")
+    print(f"Your library has a total length of {total_length} Secconds.\n")
     
     print("Which is:")
     remainder_length = total_length
@@ -63,7 +68,6 @@ def run(library_path):
         print(int(time_hours), "Hours")
         print(int(time_minutes), "Minutes")
         print(round(time_secconds,2), "Secconds")
-    
     # Minutes
     elif total_length >= 60:
         time_minutes = remainder_length // 60
@@ -72,8 +76,7 @@ def run(library_path):
         time_secconds = remainder_length
         
         print(int(time_minutes), "Minutes")
-        print(round(time_secconds,2), "Secconds")
-    
+        print(round(time_secconds,2), "Secconds") 
     # Secconds
     else:
         time_secconds = remainder_length
