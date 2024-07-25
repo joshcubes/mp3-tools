@@ -8,9 +8,7 @@ def run(library_path):
     def process_folders(rootfolder):
         global files_scanned
         folder = Path(rootfolder)
-        
-        print()
-        
+
         for item in folder.iterdir():
             if item.is_dir():
                 # recursion for subfolder

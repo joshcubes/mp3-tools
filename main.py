@@ -42,8 +42,11 @@ choice = useful_bits.intinput("Please enter your choice: ")
 
 if choice == 1:
     library = get_library_location()
+    print()
     save_all_mp3s.run(library)
+    
 
 if choice == 2:
     library = get_library_location()
+    print()
     length_of_library.run(library)
