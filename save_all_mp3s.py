@@ -3,8 +3,6 @@ files_scanned = 0
 
 def run(library_path):
     from pathlib import Path
-    
-    print("Working")
 
     def process_folders(rootfolder):
         global files_scanned

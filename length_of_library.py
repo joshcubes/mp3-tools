@@ -6,14 +6,13 @@ files_scanned = 0
 def run(library_path):
     from pathlib import Path
     from mutagen.mp3 import MP3
-    
+
     # Iterates over all subfolders looking for mp3 files
     def process_folders(rootfolder):
         global total_length
         global files_scanned
         folder = Path(rootfolder)
         
-        print()
         
         for item in folder.iterdir():
             if item.is_dir():
@@ -24,7 +23,7 @@ def run(library_path):
                 audio = MP3(item)
                 total_length += audio.info.length
                 files_scanned += 1
-                print(f"Working: {files_scanned} files scanned so far.", end=' '*10 + '\r')
+                print(f"Working: {files_scanned} files scanned so far.", end="\r")
 
     
     
